@@ -1,0 +1,21 @@
+name: ${project.artifactId}
+author: QuickLP
+version: ${project.version}
+main: de.quicklp.skywars.SkyWars
+commands:
+  addspawnpoint:
+    description: Adds a spawnpoint
+    usage: /addspawnpoint [x y z]
+    permission: skywars.addspawnpoint
+  additemchest:
+    description: Adds an itemchest
+    usage: /additemchest [x y z]
+    permission: skywars.additemchest
+  setlobby:
+    description: Sets the lobby spawnpoint
+    usage: /setlobby [x y z]
+    permission: skywars.setlobby
+  addkit:
+    description: Adds a kit
+    usage: /addkit <name>
+    permission: skywars.addkit

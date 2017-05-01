@@ -1,0 +1,8 @@
+ready: false
+lobby:
+  time: 600
+  spawnpoint:
+game:
+  min-players: 2
+  kits: []
+  spawnpoints: []
