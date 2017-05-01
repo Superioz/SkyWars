@@ -1,5 +1,9 @@
 package de.quicklp.skywars;
 
+import de.quicklp.skywars.commands.AddItemchestCommand;
+import de.quicklp.skywars.commands.AddKitCommand;
+import de.quicklp.skywars.commands.AddSpawnpointCommand;
+import de.quicklp.skywars.commands.SetLobbyCommand;
 import de.quicklp.skywars.config.ConfigManager;
 import de.quicklp.skywars.config.LanguageManager;
 import lombok.AccessLevel;
@@ -38,10 +42,10 @@ public class SkyWars extends JavaPlugin {
         languageBase.load("language");
 
         // commands
-        getCommand("addspawnpoint").setExecutor(null);
-        getCommand("additemchest").setExecutor(null);
-        getCommand("setlobby").setExecutor(null);
-        getCommand("addkit").setExecutor(null);
+        getCommand("addspawnpoint").setExecutor(new AddSpawnpointCommand());
+        getCommand("additemchest").setExecutor(new AddItemchestCommand());
+        getCommand("setlobby").setExecutor(new SetLobbyCommand());
+        getCommand("addkit").setExecutor(new AddKitCommand());
 
         // listener
     }
