@@ -18,14 +18,8 @@ import java.io.File;
 public class SkyWars extends JavaPlugin {
 
     // just the instance to access the class from outside
+    @Getter
     private static SkyWars instance;
-
-    public static synchronized SkyWars getInstance() {
-        if(instance == null) {
-            instance = new SkyWars();
-        }
-        return instance;
-    }
 
     // stuff
     private ConfigManager gameManager;
@@ -33,6 +27,7 @@ public class SkyWars extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
 
         // config
         getLogger().info("Load configuration ..");
