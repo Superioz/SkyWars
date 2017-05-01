@@ -5,6 +5,7 @@ import de.quicklp.skywars.kit.ItemKit;
 import de.quicklp.skywars.utils.SerializeUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.Location;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,17 @@ public class ConfigManager {
         List<Location> locations = new ArrayList<>();
         locationStrings.forEach(loc -> locations.add(SerializeUtil.deserializeLocation(loc)));
         return null;
+    }
+
+    public List<ItemStack> getAvailableLoot() {
+        List<String> lootStrings = mainInstance.getConfig().getStringList("game.available-loot");
+        List<ItemStack> loot = new ArrayList<>();
+        lootStrings.forEach(item -> loot.add(SerializeUtil.deserializeLoot(item)));
+        return loot;
+    }
+
+    public void setLootChest(String map, int x, int y, int z) {
+        mainInstance.getConfig().set("", "");
     }
 
 }

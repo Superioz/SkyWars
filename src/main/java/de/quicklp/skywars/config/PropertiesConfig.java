@@ -49,7 +49,7 @@ public class PropertiesConfig extends Properties {
     }
 
     @Override
-    public Object get(Object key){
+    public Object get(Object key) {
         return get(key, new Object[]{});
     }
 

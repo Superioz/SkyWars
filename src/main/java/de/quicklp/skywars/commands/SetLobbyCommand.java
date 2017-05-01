@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 public class SetLobbyCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         return false;
     }
 

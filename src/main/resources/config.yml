@@ -1,8 +1,39 @@
-ready: false
 lobby:
   time: 600
-  spawnpoint:
+  spawnpoint: world;0:0:0:0:0
 game:
   min-players: 2
   kits: []
-  spawnpoints: []
+  maps:
+    dessert:
+      name: default
+      active: true
+      min-players: 4
+      team-size:
+      spawnpoints:
+        - "default;100:100:100:50:50"
+        - "default;200:200:200:55:55"
+      loot-chest:
+        -
+    dessert:
+      name: dessert
+      active: true
+      min-players: 4
+      team-size: 2
+      spawnpoints:
+        - "dessert;100:100:100:50:50"
+        - "dessert;200:200:200:55:55"
+    special:
+      name: specialmap
+      active: true
+      min-players: 8
+      team-size: 2
+      spawnpoints:
+        - "specialmap;100:100:100:50:50"
+        - "specialmap;200:200:200:55:55"
+
+# pattern [itemid:min:max:percent]
+# for itemIDs - see http://minecraft-ids.grahamedgecombe.com/
+# for example with 100% stone per chest: [1:32:64:100]
+  available-loot:
+    - "1:32:64:100"

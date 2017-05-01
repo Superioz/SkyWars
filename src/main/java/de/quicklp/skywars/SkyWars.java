@@ -6,9 +6,12 @@ import de.quicklp.skywars.commands.AddSpawnpointCommand;
 import de.quicklp.skywars.commands.SetLobbyCommand;
 import de.quicklp.skywars.config.ConfigManager;
 import de.quicklp.skywars.config.LanguageManager;
+import de.quicklp.skywars.listeners.JoinListener;
+import de.quicklp.skywars.listeners.QuitListener;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -18,16 +21,20 @@ import java.io.File;
 public class SkyWars extends JavaPlugin {
 
     // just the instance to access the class from outside
-    @Getter
     private static SkyWars instance;
-
     // stuff
     private ConfigManager gameManager;
     private LanguageManager languageBase;
 
+    public static synchronized SkyWars getInstance() {
+        if(instance == null) {
+            instance = new SkyWars();
+        }
+        return instance;
+    }
+
     @Override
     public void onEnable() {
-        instance = this;
 
         // config
         getLogger().info("Load configuration ..");
@@ -43,6 +50,8 @@ public class SkyWars extends JavaPlugin {
         getCommand("addkit").setExecutor(new AddKitCommand());
 
         // listener
+        Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new QuitListener(), this);
     }
 
     @Override

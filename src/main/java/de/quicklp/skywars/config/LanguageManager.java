@@ -43,38 +43,6 @@ public class LanguageManager {
     }
 
     /**
-     * Checks if the language manager is loaded
-     *
-     * @return The result
-     */
-    public boolean isLoaded() {
-        return handle.isLoaded();
-    }
-
-    /**
-     * Loads the languageManager for static access
-     *
-     * @param fileName The fileName
-     */
-    public void load(String fileName) {
-        if(!fileName.endsWith(".properties")) fileName += ".properties";
-        this.file = new File(getFolder(), fileName);
-
-        // get and load properties
-        if(handle != null) {
-            handle.init(file);
-        }
-        else {
-            handle = new PropertiesConfig(file);
-        }
-    }
-
-    public void load(Locale locale) {
-        this.load(locale.toString());
-        this.currentLocale = locale;
-    }
-
-    /**
      * Get the elements of this property config
      *
      * @return The elements as string-string map
@@ -132,6 +100,38 @@ public class LanguageManager {
      */
     public static String format(String text, Object... replacements) {
         return StringUtil.format(text, s -> (String) handle.get(s), replacements);
+    }
+
+    /**
+     * Checks if the language manager is loaded
+     *
+     * @return The result
+     */
+    public boolean isLoaded() {
+        return handle.isLoaded();
+    }
+
+    /**
+     * Loads the languageManager for static access
+     *
+     * @param fileName The fileName
+     */
+    public void load(String fileName) {
+        if(!fileName.endsWith(".properties")) fileName += ".properties";
+        this.file = new File(getFolder(), fileName);
+
+        // get and load properties
+        if(handle != null) {
+            handle.init(file);
+        }
+        else {
+            handle = new PropertiesConfig(file);
+        }
+    }
+
+    public void load(Locale locale) {
+        this.load(locale.toString());
+        this.currentLocale = locale;
     }
 
 }

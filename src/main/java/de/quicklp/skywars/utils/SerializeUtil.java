@@ -1,8 +1,10 @@
 package de.quicklp.skywars.utils;
 
 import de.quicklp.skywars.kit.ItemKit;
+import de.quicklp.skywars.loot.LootItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 import org.json.simple.JSONObject;
@@ -20,6 +22,7 @@ public class SerializeUtil {
     public static final String SEPERATOR = "¶";
 
     private static final Pattern SERIALIZED_LOCATION = Pattern.compile("\\w*;-?\\d*(:-?\\d*){4}");
+    private static final Pattern SERIALIZED_ITEMSTACK = Pattern.compile("[\\d*:\\d{1,2}:\\d{1,2}:\\d{1,3}]");
 
     /**
      * Serializes an itemkit
@@ -108,6 +111,40 @@ public class SerializeUtil {
             float yaw = Float.parseFloat(numberSpl[3]);
             float pitch = Float.parseFloat(numberSpl[4]);
             return new Location(world, x, y, z, yaw, pitch);
+        }
+        catch(NullPointerException | NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Serializes a LooItem
+     *
+     * @param lootItem the item
+     * @return The string
+     * @see #SERIALIZED_ITEMSTACK
+     */
+    public static String serializeLootItem(LootItem lootItem) {
+        return lootItem.getType() + ":"
+                + (StringUtil.join(":", lootItem.getMin(), lootItem.getMax(), lootItem.getPercent()));
+    }
+
+    /**
+     * Deserializes a LootItem
+     *
+     * @param string The string
+     * @return a new Object of "LootItem"
+     * @see #SERIALIZED_ITEMSTACK
+     */
+    public static LootItem deserializeLoot(String string) {
+        if(!SERIALIZED_ITEMSTACK.matcher(string).matches()) return null;
+        try {
+            String[] spl = string.split(":");
+            Material material = Material.getMaterial(spl[0]);
+            int min = Integer.parseInt(spl[1]);
+            int max = Integer.parseInt(spl[2]);
+            int percent = Integer.parseInt(spl[3]);
+            return new LootItem(material, min, max, percent);
         }
         catch(NullPointerException | NumberFormatException ex) {
             return null;
